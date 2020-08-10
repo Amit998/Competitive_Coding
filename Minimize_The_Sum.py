@@ -19,10 +19,8 @@ for l in range(int(k)):
         if( lst[j] == maxVal):
             position=j
             break
-    
     maxVal=maxVal//2
     lst[position]=maxVal
-    
 print(sum(lst))
 
 
