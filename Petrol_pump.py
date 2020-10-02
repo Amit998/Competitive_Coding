@@ -5,34 +5,34 @@
 
 
 
-def calc_dif(a,n):
-    s=(sum(a))
-    matrix=[[0 for i in range (s+1)] for j in range(n+1) ]
-    print(matrix)
+# def calc_dif(a,n):
+#     s=(sum(a))
+#     matrix=[[0 for i in range (s+1)] for j in range(n+1) ]
+#     print(matrix)
 
-    for i in range(n+1):
-        matrix[i][0]=1
-    for i in range(1,n+1):
-        for j in range(1,s+1):
-            matrix[i][j]=matrix[i-1][j]
-            if(a[i-1]<=j):
-                matrix[i][j] |= matrix[i-1][j-a[i-1]]
+#     for i in range(n+1):
+#         matrix[i][0]=1
+#     for i in range(1,n+1):
+#         for j in range(1,s+1):
+#             matrix[i][j]=matrix[i-1][j]
+#             if(a[i-1]<=j):
+#                 matrix[i][j] |= matrix[i-1][j-a[i-1]]
    
-    for j in range(s//2,-1,-1):
-        if(matrix[n][j] ==1):
-            diff=s-(2*j)
-            break
+#     for j in range(s//2,-1,-1):
+#         if(matrix[n][j] ==1):
+#             diff=s-(2*j)
+#             break
     
-    return diff
+#     return diff
 
-ip_arr=[1,2,3,4,5,10,11,3,6,16] 
+# ip_arr=[1,2,3,4,5,10,11,3,6,16] 
 
-diff=calc_dif(ip_arr,len(ip_arr))
+# diff=calc_dif(ip_arr,len(ip_arr))
 
-min=(sum(ip_arr) - diff)/2
-print(sum(ip_arr),'sum',diff)
-max=int(min) + diff
-print(max)
+# min=(sum(ip_arr) - diff)/2
+# print(sum(ip_arr),'sum',diff)
+# max=int(min) + diff
+# print(max)
 
 
 # lst.sort()
@@ -74,3 +74,35 @@ print(max)
 
 # print(sum(lst1))
 # print(sum(lst2))
+
+def calcDiff(input,sum):
+    size=len(input)-1
+   
+    dp=[[0 for i in range(sum+1)] for j in range(size+1) ]
+    for i in range(size+1):
+        dp[i][0]=True
+    for j in range(1,sum+1):
+        dp[0][j]=False
+    for i in range(1,size+1):
+        for j in range(1,sum+1):
+            dp[i][j]=dp[i-1][j]
+            if(input[i-1] <= j):
+                dp[i][j] |= dp[i-1][j-input[i-1]]
+    print(dp)
+    for j in range(sum//2,-1,-1):
+        if (dp[size][j] == True):
+            diff=sum-(2*j)
+            break
+    
+    return diff
+            
+
+
+input=[25,30,35,20,90,110,45,70,80,12,30,35,85]
+# input=[1,2,3,4,5,10,11,3,6,16]
+sum=sum(input)
+diff=(calcDiff(input,sum))
+min_p=(sum-diff)/2
+max_p=min_p+diff
+print(min_p)
+print(max_p)
