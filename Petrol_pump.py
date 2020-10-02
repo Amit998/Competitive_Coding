@@ -1,6 +1,6 @@
-import math
+# import math
 
-# lst=[25,30,35,20,90,110,45,70,80,12,30,35,85]
+# # lst=[25,30,35,20,90,110,45,70,80,12,30,35,85]
 
 
 
@@ -8,6 +8,7 @@ import math
 def calc_dif(a,n):
     s=(sum(a))
     matrix=[[0 for i in range (s+1)] for j in range(n+1) ]
+    print(matrix)
 
     for i in range(n+1):
         matrix[i][0]=1
@@ -16,11 +17,12 @@ def calc_dif(a,n):
             matrix[i][j]=matrix[i-1][j]
             if(a[i-1]<=j):
                 matrix[i][j] |= matrix[i-1][j-a[i-1]]
-    
+   
     for j in range(s//2,-1,-1):
         if(matrix[n][j] ==1):
             diff=s-(2*j)
             break
+    
     return diff
 
 ip_arr=[1,2,3,4,5,10,11,3,6,16] 
@@ -28,10 +30,9 @@ ip_arr=[1,2,3,4,5,10,11,3,6,16]
 diff=calc_dif(ip_arr,len(ip_arr))
 
 min=(sum(ip_arr) - diff)/2
+print(sum(ip_arr),'sum',diff)
 max=int(min) + diff
 print(max)
-
-
 
 
 # lst.sort()

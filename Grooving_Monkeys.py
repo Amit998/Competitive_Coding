@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 def g_monkey(unOrdered,length):
     sec=0
     n=0
@@ -40,7 +40,7 @@ for i in range(int(input())):
 # print(tempList)
 # a=2
 # b=5
-=======
+
 def g_monkey(unOrdered,length):
     sec=0
     n=0
@@ -79,4 +79,3 @@ for i in range(int(input())):
 # print(tempList)
 # a=2
 # b=5
->>>>>>> 116fa663f77e8b0cf0d2c4134b59f253c75cf393
