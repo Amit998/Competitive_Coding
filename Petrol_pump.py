@@ -83,12 +83,13 @@ def calcDiff(input,sum):
         dp[i][0]=True
     for j in range(1,sum+1):
         dp[0][j]=False
+        
     for i in range(1,size+1):
         for j in range(1,sum+1):
             dp[i][j]=dp[i-1][j]
             if(input[i-1] <= j):
                 dp[i][j] |= dp[i-1][j-input[i-1]]
-    print(dp)
+    print(dp[len(dp)-1])
     for j in range(sum//2,-1,-1):
         if (dp[size][j] == True):
             diff=sum-(2*j)
