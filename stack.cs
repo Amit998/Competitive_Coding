@@ -1,170 +1,97 @@
-using System;
+﻿using System;
 
-namespace linkedList
+namespace stack
 {
-    class LinkedListNode
+    class StackClassNode
     {
+        public StackClassNode next;
         public int data;
-        public LinkedListNode next;
-
-        public LinkedListNode(int x)
+        public StackClassNode(int value)
         {
-            data = x;
+            data = value;
             next = null;
+
         }
     }
 
-    class LinkedList
+
+
+    class Stack
     {
         int count;
-        LinkedListNode head;
-
-        public LinkedList()
+        StackClassNode top;
+        public Stack()
         {
-            head = null;
+            top = null;
             this.count = 0;
-           
         }
 
-        public void AddNode(int data)
+        public void push(int data)
         {
-            LinkedListNode node = new LinkedListNode(data);
-            node.next = head;
-            head = node;
+            Console.Write("inserted value "+data+"\n");
+            StackClassNode node = new StackClassNode(data);
+            node.next = top;
+            top = node;
             count++;
+
         }
 
-        public void DeleteNode(int given)
+        public void size()
         {
-            LinkedListNode runner = head;
-            LinkedListNode prev = null;
-            count--;
+            Console.WriteLine(count);
+        }
 
-            while (runner != null && runner.data==given)
-            {
-                head = runner.next;
-                return;
-            }
+        public void printStack()
+        {
+            StackClassNode runner = top;
 
-            while(runner !=null && given != runner.data)
+            while(runner != null)
             {
-                prev = runner;
+
+                Console.Write("| "+runner.data+" |\n");
                 runner = runner.next;
             }
-
-            if(runner == null)
-            {
-                return;
-            }
-
-            prev.next = runner.next;
+            Console.Write("\n");
 
         }
 
-        public void AddAtPosition(int position,int data)
+        public int pop()
         {
-            int index = 0;
-            int temp;    
-            LinkedListNode runner = head;
-            if (position > count || runner.data == null)
-            {
-                Console.WriteLine("Position is bigger then the linkedSize");
-                return;
-            }
-            count++;
+            StackClassNode runner = top;
+
+            int val;
+            count--;
+            val = runner.data;
+            top = runner.next;
+            Console.Write("popped value " + val + "\n");
+            return val;
+        }
+
+        public bool contain(int data)
+        {
+            StackClassNode runner = top;
 
             while (runner != null)
+            {
+
+                if(data == runner.data)
                 {
-                index++;
-            
-                if (index >= position)
-                {
-                    //Console.WriteLine(index+""+""+ position);
-                    temp = runner.data;
-                    runner.data = data;
-                    data = temp;
-           
+                    return true;
                 }
                 runner = runner.next;
             }
+            return false;
         }
 
-        public void DeleteAtPosition(int position)
+        public int peek()
         {
-            LinkedListNode runner = head;
-            LinkedListNode prev = null;
-            count--;
-            int index = 1;
-            while (runner != null && index == position)
-            {
-                //Console.WriteLine("first");
-                head = runner.next;
-                return;
-            }
-
-            while (runner != null && index != position)
-            {
-                index++;
-                prev = runner;
-                runner = runner.next;
-            }
-
-            if (runner == null)
-            {
-                count++;
-                return;
-            }
-
-            prev.next = runner.next;
-
+            return top.data;
         }
 
-        public void getSize()
+        public StackClassNode reveserAll()
         {
-            Console.WriteLine("\n"+count);
-        }
 
-        public void printAtPos(int pos)
-        {
-            LinkedListNode runner = head;
-            int index = 1;
-
-
-            while(index != pos)
-            {
-                runner = runner.next;
-                index++;
-                
-            }
-
-            Console.WriteLine(runner.data);
-
-
-        }
-
-        public void atCenter()
-        {
-            bool isOdd;
-            int position = 1;
-            int middle = (count / 2);
-
-
-            if(count % 2 == 0)
-            {
-                printAtPos(middle);
-
-            }
-            else
-            {
-                printAtPos(middle+1);
-            }
-            //Console.WriteLine("\n" + count);
-            //Console.WriteLine("\n" + middle);
-        }
-
-        public LinkedListNode reverseLL()
-        {
-            LinkedListNode runner = head, prev = null;
+            StackClassNode runner=top, prev = null;
 
             if (runner == null)
             {
@@ -173,74 +100,44 @@ namespace linkedList
 
             while(runner != null)
             {
-                LinkedListNode next = runner.next;
+                StackClassNode next = runner.next;
+                
                 runner.next = prev;
                 prev = runner;
+                
                 runner = next;
-            }
-            head = prev;
-            return head;
-
-
-        }
-
-
-
-        public void printList()
-        {
-            LinkedListNode runner = head;
-            
-            while (runner != null)
-            {
-                Console.Write(runner.data+"->");
-                runner = runner.next;
-            }
-            Console.Write("NULL  \n");
-        }
-
-        public void iterateLL()
-        {
-            LinkedListNode runner = head;
-
-            while (runner != null)
-            {
-                Console.Write(runner.data + "\n");
-                runner = runner.next;
+                
             }
 
+            top = prev;
+
+            return top;
         }
+
     }
     class Program
     {
         static void Main(string[] args)
         {
-            LinkedList linkedList = new LinkedList();
+            Stack st = new Stack();
+            st.push(1);
+            st.push(2);
+            st.push(3);
+            st.push(4);
 
-            linkedList.AddNode(1);
-            linkedList.AddNode(2);
-            linkedList.AddNode(13);
-            linkedList.AddNode(14);
-            linkedList.AddNode(24);
-            linkedList.AddNode(4);
-            //linkedList.AddNode(42);
-            //linkedList.printList();
-            //linkedList.getSize();
+            //st.size();
+            //st.printStack();
+            st.pop();
+            st.pop();
+            st.printStack();
+            //st.printStack();
 
-            //linkedList.AddAtPosition(100, 10000);
-            //linkedList.printList();
+            //Console.Write(st.contain(1));
 
-            //linkedList.DeleteNode(13);
-            linkedList.printList();
-            //linkedList.DeleteAtPosition(3);
-            //linkedList.printList();
-            //linkedList.atCenter();
-            linkedList.reverseLL();
-          
-            linkedList.printList();
+            st.reveserAll();
+            st.printStack();
 
-
-
-            Console.ReadKey();
+            Console.WriteLine("");
         }
     }
 }
