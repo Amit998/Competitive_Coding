@@ -179,7 +179,7 @@ namespace PriorityQueue
             {
                 Node next = runner.next;
 
-                runner = prev;
+                runner.next = prev;
                 prev = runner;
 
                 runner = next;
@@ -212,7 +212,7 @@ namespace PriorityQueue
 
 
             //pq.size();
-        
+
             //Console.WriteLine("\n");
             /*pq.print();
             Console.WriteLine("\n" + pq.peek() + " peek");
@@ -230,8 +230,9 @@ namespace PriorityQueue
 
 
             //pq.print();
+            pq.print();
             pq.reveserAll();
-            //pq.print();
+            pq.print();
 
             //pq.size();
 
