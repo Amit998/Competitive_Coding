@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 
 namespace Tree
 {
     class QueueNode
     {
         public QueueNode next;
-        public int data;
-        public QueueNode(int value)
+        public dynamic data;
+        public QueueNode(dynamic value)
         {
             this.data = value;
             next = null;
@@ -15,7 +15,7 @@ namespace Tree
     class Queue
     {
         public int count;
-        public QueueNode front, rear,head;
+        public QueueNode front, rear, head;
 
         public Queue()
         {
@@ -25,13 +25,14 @@ namespace Tree
 
         public bool isEmpty()
         {
-            if (count == 0) {
+            if (count == 0)
+            {
                 return true;
             }
-            return false; 
+            return false;
         }
 
-        public void enqueue(int data)
+        public void enqueue(dynamic data)
         {
             QueueNode node = new QueueNode(data);
 
@@ -86,13 +87,13 @@ namespace Tree
     class Node
     {
         public int value;
-        public Node left,right;
+        public Node left, right;
 
         public Node(int initial)
         {
             value = initial;
-            right=left = null;
-            
+            right = left = null;
+
         }
 
     }
@@ -117,7 +118,7 @@ namespace Tree
 
         public void Add(int value)
         {
-            if(top == null)
+            if (top == null)
             {
                 Node newNode = new Node(value);
                 top = newNode;
@@ -131,7 +132,7 @@ namespace Tree
             {
                 if (value < currentNode.value)
                 {
-                    if(currentNode.left == null)
+                    if (currentNode.left == null)
                     {
                         Node newNode = new Node(value);
                         currentNode.left = newNode;
@@ -166,7 +167,7 @@ namespace Tree
             AddR(ref top, value);
         }
 
-        public void AddR(ref Node N,int value)
+        public void AddR(ref Node N, int value)
         {
             if (N == null)
             {
@@ -174,12 +175,12 @@ namespace Tree
                 N = newNode;
                 return;
             }
-            if(value < N.value)
+            if (value < N.value)
             {
                 AddR(ref N.left, value);
                 return;
             }
-            if(value >= N.value)
+            if (value >= N.value)
             {
                 AddR(ref N.right, value);
                 return;
@@ -193,23 +194,24 @@ namespace Tree
                 return root;
             }
 
-            if(key < root.value)
+            if (key < root.value)
             {
                 root.left = deleteRec(root.left, key);
             }
             else if (key > root.value)
             {
-                root.right= deleteRec(root.right, key);
+                root.right = deleteRec(root.right, key);
             }
             else
             {
-                if(root.left == null)
+                if (root.left == null)
                 {
                     return root.right;
-                }else if(root.right == null)
-                
+                }
+                else if (root.right == null)
+
                     return root.left;
-                
+
 
                 root.value = minValue(root.right);
                 root.right = deleteRec(root.right, root.value);
@@ -222,10 +224,10 @@ namespace Tree
         {
             int minv = root.value;
 
-            while(root.left != null)
+            while (root.left != null)
             {
                 minv = root.value;
-                while(root.left != null)
+                while (root.left != null)
                 {
                     minv = root.left.value;
                     root = root.left;
@@ -238,30 +240,30 @@ namespace Tree
         {
             Node root = top;
             bool flag = false;
-            Console.WriteLine(containRec(root,value,ref flag));
+            Console.WriteLine(containRec(root, value, ref flag));
         }
 
-        public bool containRec(Node root,int value,ref bool flag)
+        public bool containRec(Node root, int value, ref bool flag)
 
         {
-            if(root == null)
+            if (root == null)
             {
                 return false;
             }
-     
+
             else if (root != null)
             {
-                if(root.value == value)
+                if (root.value == value)
                 {
                     flag = true;
-                    
+
                 }
-                
-                containRec(root.left,value,ref flag);
-                containRec(root.right,value,ref flag);
+
+                containRec(root.left, value, ref flag);
+                containRec(root.right, value, ref flag);
             }
 
-  
+
 
             return flag;
 
@@ -273,7 +275,6 @@ namespace Tree
             {
                 containRec(root.left, value);
                 
-
             }else if (root.right != null)
             {
                 containRec(root.right, value);
@@ -284,7 +285,7 @@ namespace Tree
         public void delete(int key)
         {
             Node root = top;
-          
+
 
             if (root == null)
             {
@@ -292,38 +293,40 @@ namespace Tree
                 return;
             }
 
-            top = deleteRec(root,key);
-      
+            top = deleteRec(root, key);
+
         }
 
-        public void printRe() {
+        public void printRe()
+        {
 
             string myStr = "";
-            Print(null,ref myStr);
+            Print(null, ref myStr);
             Console.WriteLine(myStr);
         }
 
 
 
-        public void Print(Node N,ref string s)
+        public void Print(Node N, ref string s)
         {
-           
-            
-            if(N == null)
+
+
+            if (N == null)
             {
                 N = top;
             }
-            if(N.left != null) {
-                Print(N.left,ref s);
-                s = s + N.value.ToString()+"-";
+            if (N.left != null)
+            {
+                Print(N.left, ref s);
+                s = s + N.value.ToString() + "-";
             }
             else
             {
-                s = s + N.value.ToString()+"-";
+                s = s + N.value.ToString() + "-";
             }
-            if(N.right != null)
+            if (N.right != null)
             {
-                Print(N.right,ref s);
+                Print(N.right, ref s);
             }
         }
 
@@ -335,10 +338,10 @@ namespace Tree
 
         public void inorderRec(Node root)
         {
-            if(root != null)
+            if (root != null)
             {
                 inorderRec(root.left);
-                Console.Write(root.value+"-");
+                Console.Write(root.value + "-");
                 inorderRec(root.right);
             }
 
@@ -348,9 +351,11 @@ namespace Tree
         {
             Console.Write(level);
         }
-        public void height()
+        public int height()
         {
-            Console.WriteLine(heightHelper(top)+"Height");
+
+            //Console.WriteLine(heightHelper(top) +" Height");
+            return heightHelper(top);
         }
         public int heightHelper(Node node)
         {
@@ -363,7 +368,7 @@ namespace Tree
                 int left_height = heightHelper(node.left);
                 int right_height = heightHelper(node.right);
 
-                if(left_height > right_height)
+                if (left_height > right_height)
                 {
                     return left_height + 1;
                 }
@@ -380,10 +385,10 @@ namespace Tree
             string inorderString = "";
             string preorderString = "";
             string postOrderString = "";
-
+            Console.WriteLine("\nDFS");
             Node node = top;
-            Console.WriteLine(" Inorder");
-            inOrder(node,inorderString);
+            Console.WriteLine("Inorder");
+            inOrder(node, inorderString);
             Console.WriteLine("\n prorder");
             preOrder(node, preorderString);
             Console.WriteLine("\n Postorder");
@@ -399,16 +404,16 @@ namespace Tree
             levelOrderTraversal(node);
         }
 
-        public void inOrder(Node node,string inorderString)
+        public void inOrder(Node node, string inorderString)
         {
-            if(node == null)
+            if (node == null)
             {
                 return;
             }
 
-            inOrder(node.left,inorderString);
-            Console.Write(node.value+"->");
-            inOrder(node.right,inorderString);
+            inOrder(node.left, inorderString);
+            Console.Write(node.value + "->");
+            inOrder(node.right, inorderString);
 
         }
 
@@ -426,66 +431,76 @@ namespace Tree
 
         public void postOrder(Node node, string postOrderString)
         {
-            
+
             preOrder(node.left, postOrderString);
             preOrder(node.right, postOrderString);
             Console.Write(node.value + "->");
         }
 
-        public void get_level_value(int level)
+        public string get_level_value(int level)
         {
+            string levelString = "";
+            currentLevelValue(top, level, ref levelString);
+            //Console.WriteLine(levelString + "this is the string");
+            return levelString;
 
-            currentLevelValue(top, level);
         }
 
-        public void currentLevelValue(Node node,int level)
+        public dynamic currentLevelValue(Node node, int level, ref string levelString)
         {
-            if(node == null)
+
+            if (node == null)
             {
-                return;
+                return 0;
             }
             if (level == 1)
             {
-                Console.WriteLine(node.value );
-            }else if(level > 1)
-            {
-                currentLevelValue(node.left,level-1);
-                currentLevelValue(node.right, level - 1);
+                levelString += node.value.ToString() + "+";
+                //Console.WriteLine(node.value );
+                return node.value;
+
             }
+            else if (level > 1)
+            {
+                currentLevelValue(node.left, level - 1, ref levelString);
+                currentLevelValue(node.right, level - 1, ref levelString);
+            }
+
+            return null;
 
         }
 
         public void levelOrderTraversal(Node node)
         {
             Queue queueTest = new Queue();
-            
 
-            //Console.WriteLine(rootNode);
 
-            //Console.WriteLine(queueTest.isEmpty());
-            queueTest.enqueue(rootNode);
-            //Console.WriteLine(queueTest.isEmpty());
+            string str = "";
+
+
+            for (int i = 1; i <= height(); i++)
+            {
+                str += get_level_value(i);
+            }
+
+
+
+
+            foreach (dynamic s in str.Split("+", StringSplitOptions.None))
+            {
+
+                if (s != "")
+                {
+                    queueTest.enqueue(s);
+                }
+            }
 
 
             while (!queueTest.isEmpty())
             {
-                //Node node= queueTest.deQueue();
-                Console.WriteLine();
-
-
-                if (node.left != null)
-                {
-                    queueTest.enqueue(node.left.value);
-                }
-
-                if (node.right != null)
-                {
-                    queueTest.enqueue(node.right.value);
-                }
+                Console.Write(queueTest.deQueue() + "->");
 
             }
-
-
 
         }
 
@@ -499,35 +514,35 @@ namespace Tree
         static void Main(string[] args)
         {
 
-         
+
             NTree myTree = new NTree(10);
 
-            myTree.AddRc(1);
-            myTree.AddRc(11);
-            myTree.AddRc(2);
-            myTree.AddRc(3);
+            myTree.AddRc(5);
+            myTree.AddRc(13);
             myTree.AddRc(4);
             myTree.AddRc(5);
-            myTree.BFS();
+            myTree.AddRc(11);
+            myTree.AddRc(14);
+            //myTree.height();
             /* myTree.AddRc(22);
              myTree.AddRc(6);
              myTree.AddRc(32);
              myTree.AddRc(9);*/
 
-            //myTree.get_level_value(2);
+            //myTree.get_level_value(3);
+            myTree.BFS();
 
 
             //myTree.inorder();
 
             //myTree.printRe();
-            //myTree.DFS();
+            myTree.DFS();
 
             /*Queue queue = new Queue();
             queue.enqueue(1);
             queue.enqueue(10);
             queue.enqueue(100);
             queue.enqueue(1000);
-
             queue.deQueue();
             queue.print();
             queue.deQueue();
@@ -545,6 +560,3 @@ namespace Tree
         }
     }
 }
-
-
-//https://www.journaldev.com/44201/breadth-first-search-depth-first-search-bfs-dfs
